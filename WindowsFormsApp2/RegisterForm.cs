@@ -46,12 +46,12 @@ namespace WindowsFormsApp2
                 return;
             }
             DB db = new DB();
-            MySqlCommand command = new MySqlCommand("INSERT INTO `users` (`login`, `password`, `name`, `surname`) VALUES (@login, @pass, @name,@surname);", db.getConnection());
+            MySqlCommand command = new MySqlCommand("INSERT INTO `users` (`email`, `firstname`, `secondname`, `password`) VALUES (@email, @firstname, @secondname,@password);", db.getConnection());
 
-            command.Parameters.Add("@login", MySqlDbType.VarChar).Value = emailField.Text;
-            command.Parameters.Add("@pass", MySqlDbType.VarChar).Value = passwordField.Text;
-            command.Parameters.Add("@name", MySqlDbType.VarChar).Value = nameField.Text;
-            command.Parameters.Add("@surname", MySqlDbType.VarChar).Value = surnameField.Text;
+            command.Parameters.Add("@email", MySqlDbType.VarChar).Value = emailField.Text;
+            command.Parameters.Add("@password", MySqlDbType.VarChar).Value = passwordField.Text;
+            command.Parameters.Add("@firstname", MySqlDbType.VarChar).Value = nameField.Text;
+            command.Parameters.Add("@secondname", MySqlDbType.VarChar).Value = surnameField.Text;
 
             db.openConnection();
 
@@ -75,7 +75,7 @@ namespace WindowsFormsApp2
 
             MySqlDataAdapter adapter = new MySqlDataAdapter();
 
-            MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `login` = @uL", db.getConnection());
+            MySqlCommand command = new MySqlCommand("SELECT * FROM `users` WHERE `email` = @uL", db.getConnection());
             command.Parameters.Add("@uL", MySqlDbType.VarChar).Value = emailField.Text;
 
             adapter.SelectCommand = command;
